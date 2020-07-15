@@ -52,7 +52,8 @@ namespace ReactUdemy
                 x.Options.SourcePath = System.IO.Path.Join(env.ContentRootPath,"app");
 
                 if (env.IsDevelopment()) {
-                    x.UseReactDevelopmentServer(npmScript:"start");
+                    x.UseProxyToSpaDevelopmentServer("http://127.0.0.1:3000");
+                    //x.UseReactDevelopmentServer(npmScript:"start");
                 }
             });
             app.UseRouting();
