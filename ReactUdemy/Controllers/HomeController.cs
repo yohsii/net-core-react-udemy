@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -16,8 +19,10 @@ namespace ReactUdemy.Controllers
         private readonly ILogger<HomeController> _logger;
 
         //[Route("api/test")]
-        public IActionResult Test() {
-            return Json("testing123...");
+        public async Task<IActionResult> Test() {
+            var httpClient = new HttpClient();
+            var weatherInfoJson = await httpClient.GetStringAsync("https://samples.openweathermap.org/data/2.5/weather?q=London,uk&appid=439d4b804bc8187953eb36d2a8c26a02");
+            return Content(weatherInfoJson,"application/json");
         }
         public HomeController(ILogger<HomeController> logger)
         {
