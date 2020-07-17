@@ -12,8 +12,8 @@ using ReactUdemy.Models;
 
 namespace ReactUdemy.Controllers
 {
-    [ApiController]
-    [Route("api/[action]")]
+    //[ApiController]
+    //[Route("api/[action]")]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -29,8 +29,9 @@ namespace ReactUdemy.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(string path)
         {
+
             return View();
         }
 

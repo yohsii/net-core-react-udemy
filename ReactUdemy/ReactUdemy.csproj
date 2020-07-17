@@ -14,11 +14,13 @@
 
   <ItemGroup>
     <Content Remove="compilerconfig.json" />
+    <Content Remove="wwwroot\logo192.png" />
   </ItemGroup>
 
 
   <ItemGroup>
     <None Include="compilerconfig.json" />
+    <None Include="wwwroot\logo192.png" />
   </ItemGroup>
 
 

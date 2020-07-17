@@ -24,11 +24,12 @@ namespace ReactUdemy
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc(x => x.EnableEndpointRouting = false);
+            services.AddControllersWithViews();
+
+            //services.AddMvc(x => x.EnableEndpointRouting = false);
             services.AddSpaStaticFiles(x=> {
                 x.RootPath = "app/build";
             });
-            services.AddControllersWithViews();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -47,25 +48,35 @@ namespace ReactUdemy
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
-            app.UseMvc();
-            app.UseSpa(x=> {
-                x.Options.SourcePath = System.IO.Path.Join(env.ContentRootPath,"app");
-
-                if (env.IsDevelopment()) {
-                    x.UseProxyToSpaDevelopmentServer("http://127.0.0.1:3000");
-                    //x.UseReactDevelopmentServer(npmScript:"start");
-                }
-            });
+            
             app.UseRouting();
 
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
+                //endpoints.MapControllerRoute(
+                //    name: "default",
+                //    pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    name: "catchAll",
+                    pattern: "{**path}"
+                    ,constraints:new {path= @"^(?!main\.|static\/|sockjs-node|manifest.json).+" }
+                    , defaults: new { controller = "Home", action = "Index" }
+                    );
             });
+
+            app.UseSpa(x => {
+                x.Options.SourcePath = System.IO.Path.Join(env.ContentRootPath, "app");
+
+                if (env.IsDevelopment())
+                {
+                    x.UseProxyToSpaDevelopmentServer("http://127.0.0.1:3000");
+                    //x.UseReactDevelopmentServer(npmScript:"start");
+                }
+            });
+
+
         }
     }
 }
