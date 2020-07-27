@@ -30,7 +30,7 @@ const Dropdown = (props) => {
     return (
         <div ref={ref1} className="ui form">
             <div className="field">
-                <label className="label">Select a Colour</label>
+                <label className="label">{props.label}</label>
                 <div onClick={() => { setOpen(!open); console.log("dropdown clicked"); }} className={`ui selection dropdown ${open?'visible active':''}`}>
                     <i className="dropdown icon"></i>
                     <div className="text">{props.selected.label}</div>
