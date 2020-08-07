@@ -44,7 +44,9 @@
 
 
   <ItemGroup>
+    <Folder Include="app\src\actions\" />
     <Folder Include="app\src\css\" />
+    <Folder Include="app\src\reducers\" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

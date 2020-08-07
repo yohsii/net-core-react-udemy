@@ -58,12 +58,14 @@ namespace ReactUdemy
                 //endpoints.MapControllerRoute(
                 //    name: "default",
                 //    pattern: "{controller=Home}/{action=Index}/{id?}");
+                /*
                 endpoints.MapControllerRoute(
                     name: "catchAll",
                     pattern: "{**path}"
                     ,constraints:new {path= @"^(?!main\.|static\/|sockjs-node|manifest.json).+" }
                     , defaults: new { controller = "Home", action = "Index" }
                     );
+                */
             });
 
             app.UseSpa(x => {
