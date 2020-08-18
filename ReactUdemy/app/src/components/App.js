@@ -1,30 +1,25 @@
-﻿import React from 'react';
-import { Router, Route, Link, Switch } from 'react-router-dom';
-import StreamCreate from './streams/StreamCreate';
-import StreamEdit from './streams/StreamEdit';
-import StreamDelete from './streams/StreamDelete';
-import StreamList from './streams/StreamList';
-import StreamShow from './streams/StreamShow';
-import Header from './Header';
-import history from '../history';
+﻿import React, { useEffect,useState} from 'react';
+import UserCreate from './UserCreate';
+import LanguageContext from '../contexts/LanguageContext';
+import ColorContext from '../contexts/ColorContext';
 
 const App = (props) => {
+    const [language,setLanguage] = useState("english");
+
+    const onLanguageChange = (language) => {
+
+    }
 
     return (
-        <div>
-            <Router history={history}>
-                <div>
-                    <Header />
-                    <Switch>
-                        <Route path="/" exact component={StreamList} />
-                        <Route path="/streams/" exact component={StreamList} />
-                        <Route path="/streams/new" exact component={StreamCreate} />
-                        <Route path="/streams/edit/:id" exact component={(props) => <StreamEdit id={props.match.params.id}/> } />
-                        <Route path="/streams/delete/:id" exact component={StreamDelete} />
-                        <Route path="/streams/:id" exact component={StreamShow} />
-                    </Switch>
-                </div>
-            </Router>
+        <div className="ui container">
+            Select a language:
+            <i onClick={()=>setLanguage("english")} className="flag us" />
+            <i onClick={() => setLanguage("nl")} className="flag nl"/>
+            <LanguageContext.Provider value={language}>
+                <ColorContext.Provider value={'blue'}>
+                    <UserCreate />
+                </ColorContext.Provider>
+            </LanguageContext.Provider>
         </div>
     );
 }
