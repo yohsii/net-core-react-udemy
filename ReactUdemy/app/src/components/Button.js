@@ -4,7 +4,7 @@ import ColorContext from '../contexts/ColorContext';
 const Button = (props) => {
     const contextValue = useContext(LanguageContext);
     const colorContextValue = useContext(ColorContext);
-    const text = contextValue === "english" ? "Submit" : "Voorleggen";
+    const text = contextValue.language === "english" ? "Submit" : "Voorleggen";
     const className = colorContextValue === "red"?"red":"primary";
     console.log("from languageContext:", contextValue);
     return (
